@@ -1,0 +1,732 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Orbitron", sans-serif;
+}
+
+:root {
+  --black: #000;
+  --dark-blue: #0d1b2a;
+  --navy: #1b263b;
+  --steel: #415a77;
+  --slate: #778da9;
+  --white: #e0e1dd;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Initial Header Style */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.85); /* Semi-transparent dark background */
+  backdrop-filter: blur(20px); /* Enhanced blur effect for modern look */
+  -webkit-backdrop-filter: blur(20px); /* Safari support */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother premium transition */
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+/* Logo Style */
+.header .logo {
+  height: 80px; /* Adjust based on your logo's aspect ratio */
+  width: auto;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth premium transition */
+  filter: brightness(1);
+}
+
+/* Navigation Links Style */
+.header .nav-links {
+  display: flex;
+  gap: 32px; /* Increased gap for premium spacing */
+}
+
+.header .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transitions */
+  position: relative;
+  padding: 8px 0;
+  opacity: 0.9;
+}
+
+/* Premium hover effects */
+.header .nav-links a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header .nav-links a:hover {
+  color: #fff;
+  opacity: 1;
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.header .nav-links a:hover::before {
+  width: 100%;
+}
+
+/* Scrolled Header Style */
+.header.scrolled {
+  padding: 20px 20px;
+  background: rgba(0, 0, 0, 0.95); /* More solid background when scrolled */
+  backdrop-filter: blur(30px); /* Enhanced blur */
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header.scrolled .logo {
+  height: 40px; /* Smaller logo when scrolled */
+  transform: scale(0.95); /* Subtle scale animation */
+}
+
+.header.scrolled .nav-links a {
+  font-size: 13px; /* Slightly smaller text */
+}
+
+.header.scrolled .nav-links {
+  gap: 28px; /* Slightly reduced gap when scrolled */
+}
+
+/* Add scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.8));
+  z-index: 1001;
+  transition: width 0.1s ease;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .header {
+    padding: 32px 16px;
+  }
+
+  .header.scrolled {
+    padding: 16px 16px;
+  }
+
+  .header .nav-links {
+    gap: 20px;
+  }
+
+  .header .nav-links a {
+    font-size: 12px;
+  }
+
+  .header.scrolled .nav-links a {
+    font-size: 11px;
+  }
+}
+
+/* Optional: Add a subtle animation on page load */
+.header {
+  animation: headerSlideIn 0.8s ease-out;
+}
+
+@keyframes headerSlideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("https://images.unsplash.com/photo-1597437711450-cd4e30dfa3fa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    center/cover no-repeat;
+  position: relative;
+  margin-top: 10em;
+  background-attachment: fixed; /* Ensures smooth movement */
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Darkened overlay */
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero-title {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: #000;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  padding: 6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.section-content {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.section-content p {
+  margin-bottom: 20px;
+}
+
+.section-content h2 {
+  margin-block-end: 2rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  position: relative;
+  padding-block-end: 0.5rem;
+}
+
+.section-content h2::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-color, #4a4a4a) 20%,
+    var(--accent-color, #4a4a4a) 80%,
+    transparent
+  );
+  transform: scaleX(0.3);
+  opacity: 0;
+  animation: lineReveal 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes lineReveal {
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.section-image {
+  flex: 1;
+  height: 400px;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateX(20px);
+  will-change: transform, opacity;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+
+.section-image.visible {
+  opacity: 1;
+  transform: translateX(0);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.section.visible .section-content,
+.section.visible .section-image {
+  animation: fadeInSide 1s ease forwards;
+}
+
+/* Common button styles */
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-decoration: none; /* Remove the underline */
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  color: inherit; /* Inherit color for text */
+}
+
+/* Discover More Button */
+#discover-more-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #000; /* Default black text */
+  border: 2px solid #000; /* Black border */
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background: transparent; /* Transparent by default */
+}
+
+/* Hover state */
+#discover-more-button:hover {
+  background: #000; /* Fully black background on hover */
+  color: #fff !important; /* Force white text on hover */
+  transform: translateY(-2px);
+}
+
+/* Hover effect overlay */
+#discover-more-button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  transition: width 0.3s ease;
+  z-index: -1; /* Make sure it doesn't cover the text */
+}
+
+/* Expand background on hover */
+#discover-more-button:hover::after {
+  width: 100%;
+}
+
+/* Learn More Button */
+.section:nth-child(even) .learn-more-button {
+  background: transparent;
+  color: #fff; /* White text */
+  border-color: #000; /* Black border */
+}
+
+.section:nth-child(even) #learn-more-button:hover {
+  background: #f0f0f0; /* Off-white background on hover */
+  color: #000; /* Black text on hover */
+  transform: translateY(-2px);
+}
+
+/* Button hover effect */
+#learn-more-button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transition: width 0.3s ease;
+}
+
+#learn-more-button:hover::after {
+  width: 100%;
+}
+
+/* Prevent link from showing blue color */
+a:link,
+a:visited {
+  color: inherit; /* Inherit color from button styles */
+}
+
+/* Footer button specific styles */
+.footer .button {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.footer .button:hover {
+  background: var(--white);
+  color: var(--dark-blue);
+}
+
+/* Add a subtle glow effect on hover */
+.button:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* ... (rest of the previous CSS remains the same) ... */
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--slate);
+}
+
+.footer {
+  background: #e0e1dd;
+  padding: 2rem;
+  text-align: center;
+  color: var(--dark-blue);
+}
+
+.footer-logo {
+  height: 60px;
+  margin-bottom: 1rem;
+  /* Adding slight shadow for better visibility on light background */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.footer p {
+  color: var(--navy);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.footer .social-links a {
+  color: var(--navy);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer .social-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--navy);
+  transition: width 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  color: var(--steel);
+}
+
+.footer .social-links a:hover::after {
+  width: 100%;
+}
+
+.footer .button {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+
+.footer .button:hover {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .section-image {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+.contact-section {
+  position: relative;
+  min-height: 100vh;
+  background: var(--dark-blue);
+  color: var(--white);
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.contact-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.content-wrapper {
+  max-width: 500px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--navy);
+}
+
+.section-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  color: var(--steel);
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px solid var(--navy);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--navy);
+  transition: all 0.3s ease;
+}
+
+.social-card:hover {
+  background: #e0e1dd;
+  color: var(--navy);
+  transform: translateY(-5px);
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.5rem;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.social-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: var(--navy);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.contact-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.contact-button:hover {
+  background: #e0e1dd;
+  color: var(--navy);
+}
+
+.contact-button:hover svg {
+  transform: translateX(5px);
+}
+
+/* Contact Image Wrapper */
+.contact-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120%;
+  max-width: 700px; /* Adjust size as needed */
+  margin: 0 auto;
+  position: relative;
+  margin-top: 50px;
+}
+
+/* Transparent Contact Image */
+.contact-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensures the image stays sharp */
+  filter: contrast(1.2) saturate(1.2) sharpness(1.2);
+  transition: transform 0.3s ease;
+}
+
+/* Hover Effect */
+.contact-image-wrapper:hover .contact-image {
+  transform: scale(1.05);
+}
+
+/* Large Screens (Desktops & Laptops) */
+@media (min-width: 1200px) {
+  .contact-image-wrapper {
+    max-width: 600px;
+  }
+}
+
+/* Tablets (1024px and below) */
+@media (max-width: 1024px) {
+  .contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-image-wrapper {
+    max-width: 450px;
+    height: 40vh;
+  }
+
+  .contact-content {
+    padding: 3rem 2rem;
+  }
+
+  .content-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* Small Tablets & Large Phones (768px and below) */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .social-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-image-wrapper {
+    max-width: 380px;
+    height: 35vh;
+  }
+}
+
+/* Mobile Phones (480px and below) */
+@media (max-width: 480px) {
+  .contact-image-wrapper {
+    max-width: 300px;
+    height: 30vh;
+  }
+
+  .contact-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-image {
+    filter: contrast(1.1) saturate(1.1);
+  }
+}
